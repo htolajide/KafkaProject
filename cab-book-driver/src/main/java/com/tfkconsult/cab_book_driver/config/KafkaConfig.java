@@ -1,6 +1,6 @@
-package com.tfkconsult.config;
+package com.tfkconsult.cab_book_driver.config;
 
-import com.tfkconsult.constants.AppConstant;
+import com.tfkconsult.cab_book_driver.constants.AppConstant;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +27,17 @@ public class KafkaConfig {
     @Bean
     public NewTopic driverJson() {
         return TopicBuilder
-                .name(AppConstant.Driver_JSON)
+                .name(AppConstant.Driver_Object)
                 .partitions(3)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic customerObject() {
+        return TopicBuilder
+                .name(AppConstant.CUSTOMER_OBJECT)
+                .partitions(2)
                 .replicas(1)
                 .build();
     }

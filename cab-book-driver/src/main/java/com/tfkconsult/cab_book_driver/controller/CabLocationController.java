@@ -1,7 +1,9 @@
-package com.tfkconsult.controller;
+package com.tfkconsult.cab_book_driver.controller;
 
+import com.tfkconsult.cab_book_driver.service.CabLocationService;
+import com.tfkconsult.dto.Customer;
 import com.tfkconsult.dto.Driver;
-import com.tfkconsult.service.CabLocationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +48,18 @@ public class CabLocationController {
 
             cabLocationService.driverSerialise(driver);
             return ResponseEntity.ok("Driver publish successful");
+        }catch(Exception ex){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
+
+    @PostMapping("/customer")
+    public ResponseEntity<?> produceCustomer(@RequestBody Customer customer){
+        try{
+
+            cabLocationService.customerSerialise(customer);
+            return ResponseEntity.ok("Customer publish successful");
         }catch(Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
